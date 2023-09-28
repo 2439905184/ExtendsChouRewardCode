@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可扩展抽奖代码</title>
+    <style>
+        div > p
+        {
+            display: inline-block;
+            border: solid 2px black;
+            width: 64px;
+            height: 64px;
+        }
+        .btn1
+        {
+            background-color: brown;
+            width: 150px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 横过来的，可自由扩展 -->
+    <div id="choujiang">
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+        <p>4</p>
+        <button>+</button>
+    </div>
+    <button class="btn1" onclick="start()">开始抽奖</button>
+    <button class="btn1" onclick="restart()">重置</button>
+    <script>
+        var index = -1
+        const length = 4
+        var timer_idx 
+        function start()
+        {
+            timer_idx = setInterval(function()
+            {
+                if(index <3)
+                {
+                    var m  = Math.random() *length
+                    index +=1
+                }
+                var current_node = document.getElementById("choujiang").children.item(m)
+                console.log(current_node)
+                current_node.style = "background-color:red"
+            },1000)
+        }
+
+        function restart()
+        {
+            index = -1
+            clearInterval(timer_idx)
+            for(var ii = 0; ii<4; ii++)
+            {
+                var each = document.getElementById("choujiang").children.item(ii)
+                each.style = ""
+            }
+        }
+    </script>
+</body>
+</html>
